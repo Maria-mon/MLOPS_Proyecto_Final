@@ -1,0 +1,9 @@
+apache-airflow==2.8.1
+requests
+pandas
+scikit-learn
+mlflow
+boto3
+numpy
+psycopg2-binary
+

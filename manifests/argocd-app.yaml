@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlops-proyecto-final
+  namespace: argocd  # Este es el namespace donde está instalado Argo CD
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Maria-mon/MLOPS_Proyecto_Final_2025
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mlops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

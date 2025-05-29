@@ -1,0 +1,42 @@
+# --- DEPLOYMENT streamlit_ui ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamlit-ui
+  namespace: mlops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streamlit-ui
+  template:
+    metadata:
+      labels:
+        app: streamlit-ui
+    spec:
+      containers:
+        - name: streamlit-ui
+          image: mariamon/streamlit-ui:latest
+          ports:
+            - containerPort: 8501
+          env:
+            - name: INFERENCE_API_URL
+              value: http://api:8000
+
+---
+# --- SERVICE streamlit_ui ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamlit-ui
+  namespace: mlops
+spec:
+  type: NodePort
+  selector:
+    app: streamlit-ui
+  ports:
+    - port: 8501
+      targetPort: 8501
+      nodePort: 30701
+
+
