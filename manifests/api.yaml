@@ -1,36 +1,38 @@
-
+# --- SERVICE inference-api (NodePort para acceso externo) ---
 apiVersion: v1
 kind: Service
 metadata:
   name: inference-api
   namespace: mlops
 spec:
+  type: NodePort
   selector:
     app: inference-api
   ports:
     - port: 8000
       targetPort: 8000
-      
-      
-      # --- DEPLOYMENT api ---
+      nodePort: 30800
+
+---
+# --- DEPLOYMENT inference-api ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: inference-api
   namespace: mlops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: inference-api
   template:
     metadata:
       labels:
-        app: api
+        app: inference-api
     spec:
       containers:
-        - name: inference
-          image: mariamon/api:latest
+        - name: inference-api
+          image: mariamon/inference-api:latest  # Reemplazado automáticamente por GitHub Actions
           ports:
             - containerPort: 8000
           env:
@@ -45,21 +47,4 @@ spec:
             - name: MODEL_NAME
               value: diabetes_model
           command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
-
----
-# --- SERVICE api ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: api
-  namespace: mlops
-spec:
-  type: NodePort
-  selector:
-    app: api
-  ports:
-    - port: 8000
-      targetPort: 8000
-      nodePort: 30800
-
 
