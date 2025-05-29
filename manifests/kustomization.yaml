@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: mlops
 
 resources:
-  - postgres.yaml
+  - postgres-deployment.yaml
   - minio.yaml
   - mlflow.yaml
   - api.yaml
