@@ -29,7 +29,7 @@ services:
       - ./datasets:/opt/airflow/datasets
       - ./airflow/models:/opt/airflow/models
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - mlops_network
     command: ["airflow", "webserver"]
