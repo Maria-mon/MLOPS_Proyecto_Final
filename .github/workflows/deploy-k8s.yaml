@@ -1,0 +1,36 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manifests/**'
+      - '.github/workflows/deploy-k8s.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Decode and write kubeconfig
+      run: |
+        echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig
+        mkdir -p $HOME/.kube
+        mv kubeconfig $HOME/.kube/config
+
+    - name: Set context and namespace
+      run: |
+        kubectl config use-context kind-mlops || kubectl config current-context
+        kubectl create namespace mlops --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Apply Kustomization
+      run: kubectl apply -k manifests/

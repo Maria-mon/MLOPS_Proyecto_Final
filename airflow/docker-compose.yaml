@@ -13,14 +13,14 @@ services:
     env_file: .env
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@10.43.101.187:30432/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@172.17.0.1:30432/airflow
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
-      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql+psycopg2://airflow:airflow@10.43.101.187:30432/airflow
-      - AIRFLOW_CONN_MLFLOW_DEFAULT=http://10.43.101.187:30500
-      - MLFLOW_TRACKING_URI=http://10.43.101.187:30500
+      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql+psycopg2://airflow:airflow@172.17.0.1:30432/airflow
+      - AIRFLOW_CONN_MLFLOW_DEFAULT=http://172.17.0.1:30500
+      - MLFLOW_TRACKING_URI=http://172.17.0.1:30500
       - MLFLOW_S3_BUCKET=mlflow-artifacts
-      - MLFLOW_S3_ENDPOINT_URL=http://10.43.101.187:30900
+      - MLFLOW_S3_ENDPOINT_URL=http://172.17.0.1:30900
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
     volumes:
@@ -42,13 +42,13 @@ services:
     env_file: .env
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@10.43.101.187:30432/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@172.17.0.1:30432/airflow
       - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
-      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql+psycopg2://airflow:airflow@10.43.101.187:30432/airflow
-      - AIRFLOW_CONN_MLFLOW_DEFAULT=http://10.43.101.187:30500
-      - MLFLOW_TRACKING_URI=http://10.43.101.187:30500
+      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql+psycopg2://airflow:airflow@172.17.0.1:30432/airflow
+      - AIRFLOW_CONN_MLFLOW_DEFAULT=http://172.17.0.1:30500
+      - MLFLOW_TRACKING_URI=http://172.17.0.1:30500
       - MLFLOW_S3_BUCKET=mlflow-artifacts
-      - MLFLOW_S3_ENDPOINT_URL=http://10.43.101.187:30900
+      - MLFLOW_S3_ENDPOINT_URL=http://172.17.0.1:30900
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
     volumes:
