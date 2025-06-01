@@ -25,7 +25,7 @@ jobs:
 
       - name: Update manifest image tag
         run: |
-          sed -i "s|image: mariamon/inference-ui:.*|image: mariamon/inference-ui:${{ env.IMAGE_TAG }}|g" manifests/streamlit-ui.yaml
+          sed -i "s|image: mariamon/inference-ui:.*|image: mariamon/inference-ui:${{ env.IMAGE_TAG }}|g" manifests/streamlit_ui.yaml
 
       - name: Commit and Push updated manifest
         env:
