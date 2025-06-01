@@ -1,0 +1,83 @@
+[2025-06-01T15:01:22.414+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: evaluate_and_train.train_model manual__2025-06-01T14:59:55.048322+00:00 [queued]>
+[2025-06-01T15:01:22.437+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: evaluate_and_train.train_model manual__2025-06-01T14:59:55.048322+00:00 [queued]>
+[2025-06-01T15:01:22.438+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-06-01T15:01:22.475+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2025-06-01 14:59:55.048322+00:00
+[2025-06-01T15:01:22.508+0000] {standard_task_runner.py:60} INFO - Started process 29145 to run task
+[2025-06-01T15:01:22.521+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'evaluate_and_train', 'train_model', 'manual__2025-06-01T14:59:55.048322+00:00', '--job-id', '100', '--raw', '--subdir', 'DAGS_FOLDER/evaluate_and_train.py', '--cfg-path', '/tmp/tmppgp9xn7b']
+[2025-06-01T15:01:22.527+0000] {standard_task_runner.py:88} INFO - Job 100: Subtask train_model
+[2025-06-01T15:01:22.674+0000] {task_command.py:423} INFO - Running <TaskInstance: evaluate_and_train.train_model manual__2025-06-01T14:59:55.048322+00:00 [running]> on host 9c020e596300
+[2025-06-01T15:01:22.967+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='evaluate_and_train' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T14:59:55.048322+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T14:59:55.048322+00:00'
+[2025-06-01T15:01:25.233+0000] {logging_mixin.py:188} WARNING - 2025/06/01 15:01:25 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-06-01T15:01:30.549+0000] {logging_mixin.py:188} WARNING - 2025/06/01 15:01:30 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.
+[2025-06-01T15:01:30.812+0000] {credentials.py:1147} INFO - Found credentials in environment variables.
+[2025-06-01T15:01:31.057+0000] {logging_mixin.py:188} WARNING - 2025/06/01 15:01:31 INFO mlflow.tracking._tracking_service.client: 🏃 View run melodic-ape-563 at: http://172.17.0.1:30500/#/experiments/1/runs/59ef632d91cc4df7a0ce405ee6f5c4c5.
+[2025-06-01T15:01:31.057+0000] {logging_mixin.py:188} WARNING - 2025/06/01 15:01:31 INFO mlflow.tracking._tracking_service.client: 🧪 View experiment at: http://172.17.0.1:30500/#/experiments/1.
+[2025-06-01T15:01:31.079+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/boto3/s3/transfer.py", line 371, in upload_file
+    future.result()
+  File "/home/airflow/.local/lib/python3.8/site-packages/s3transfer/futures.py", line 103, in result
+    return self._coordinator.result()
+  File "/home/airflow/.local/lib/python3.8/site-packages/s3transfer/futures.py", line 266, in result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/s3transfer/tasks.py", line 139, in __call__
+    return self._execute_main(kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/s3transfer/tasks.py", line 162, in _execute_main
+    return_value = self._main(**kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/s3transfer/upload.py", line 764, in _main
+    client.put_object(Bucket=bucket, Key=key, Body=body, **extra_args)
+  File "/home/airflow/.local/lib/python3.8/site-packages/botocore/client.py", line 553, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/botocore/client.py", line 1009, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.NoSuchBucket: An error occurred (NoSuchBucket) when calling the PutObject operation: The specified bucket does not exist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/evaluate_and_train.py", line 77, in train_model
+    mlflow.sklearn.log_model(model, "model", registered_model_name=MODEL_NAME)
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/sklearn/__init__.py", line 413, in log_model
+    return Model.log(
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/models/model.py", line 744, in log
+    mlflow.tracking.fluent.log_artifacts(local_path, mlflow_model.artifact_path, run_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/tracking/fluent.py", line 1170, in log_artifacts
+    MlflowClient().log_artifacts(run_id, local_dir, artifact_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/tracking/client.py", line 1977, in log_artifacts
+    self._tracking_client.log_artifacts(run_id, local_dir, artifact_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/tracking/_tracking_service/client.py", line 874, in log_artifacts
+    self._get_artifact_repo(run_id).log_artifacts(local_dir, artifact_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/store/artifact/s3_artifact_repo.py", line 194, in log_artifacts
+    self._upload_file(
+  File "/home/airflow/.local/lib/python3.8/site-packages/mlflow/store/artifact/s3_artifact_repo.py", line 169, in _upload_file
+    s3_client.upload_file(Filename=local_file, Bucket=bucket, Key=key, ExtraArgs=extra_args)
+  File "/home/airflow/.local/lib/python3.8/site-packages/boto3/s3/inject.py", line 145, in upload_file
+    return transfer.upload_file(
+  File "/home/airflow/.local/lib/python3.8/site-packages/boto3/s3/transfer.py", line 377, in upload_file
+    raise S3UploadFailedError(
+boto3.exceptions.S3UploadFailedError: Failed to upload /tmp/tmpinr0ia7h/model/requirements.txt to mlflow-artifacts/1/59ef632d91cc4df7a0ce405ee6f5c4c5/artifacts/model/requirements.txt: An error occurred (NoSuchBucket) when calling the PutObject operation: The specified bucket does not exist
+[2025-06-01T15:01:31.115+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=evaluate_and_train, task_id=train_model, execution_date=20250601T145955, start_date=20250601T150122, end_date=20250601T150131
+[2025-06-01T15:01:31.158+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 100 for task train_model (Failed to upload /tmp/tmpinr0ia7h/model/requirements.txt to mlflow-artifacts/1/59ef632d91cc4df7a0ce405ee6f5c4c5/artifacts/model/requirements.txt: An error occurred (NoSuchBucket) when calling the PutObject operation: The specified bucket does not exist; 29145)
+[2025-06-01T15:01:31.268+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T15:01:31.314+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

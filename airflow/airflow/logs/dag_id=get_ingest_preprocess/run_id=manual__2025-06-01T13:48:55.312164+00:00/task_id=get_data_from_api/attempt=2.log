@@ -1,0 +1,26 @@
+[2025-06-01T13:51:01.198+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:48:55.312164+00:00 [queued]>
+[2025-06-01T13:51:01.212+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:48:55.312164+00:00 [queued]>
+[2025-06-01T13:51:01.213+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-06-01T13:51:01.238+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 13:48:55.312164+00:00
+[2025-06-01T13:51:01.267+0000] {standard_task_runner.py:60} INFO - Started process 27074 to run task
+[2025-06-01T13:51:01.280+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T13:48:55.312164+00:00', '--job-id', '82', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmp6ecuoynw']
+[2025-06-01T13:51:01.289+0000] {standard_task_runner.py:88} INFO - Job 82: Subtask get_data_from_api
+[2025-06-01T13:51:01.433+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:48:55.312164+00:00 [running]> on host 9c020e596300
+[2025-06-01T13:51:01.688+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T13:48:55.312164+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T13:48:55.312164+00:00'
+[2025-06-01T13:51:01.693+0000] {logging_mixin.py:188} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T13:51:01.718+0000] {logging_mixin.py:188} INFO - [ERROR] Respuesta completa: {"detail":"Ya se recolectó toda la información mínima necesaria"}
+[2025-06-01T13:51:01.720+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 42, in get_data_from_api
+    raise ValueError(f"API falló con código {response.status_code}")
+ValueError: API falló con código 400
+[2025-06-01T13:51:01.744+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T134855, start_date=20250601T135101, end_date=20250601T135101
+[2025-06-01T13:51:01.764+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 82 for task get_data_from_api (API falló con código 400; 27074)
+[2025-06-01T13:51:01.817+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T13:51:01.867+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

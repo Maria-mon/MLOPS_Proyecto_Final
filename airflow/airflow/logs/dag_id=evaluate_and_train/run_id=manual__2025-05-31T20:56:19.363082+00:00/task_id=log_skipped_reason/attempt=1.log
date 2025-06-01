@@ -1,0 +1,32 @@
+[2025-05-31T20:56:34.438+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: evaluate_and_train.log_skipped_reason manual__2025-05-31T20:56:19.363082+00:00 [queued]>
+[2025-05-31T20:56:34.530+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: evaluate_and_train.log_skipped_reason manual__2025-05-31T20:56:19.363082+00:00 [queued]>
+[2025-05-31T20:56:34.532+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-05-31T20:56:34.610+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): log_skipped_reason> on 2025-05-31 20:56:19.363082+00:00
+[2025-05-31T20:56:34.702+0000] {standard_task_runner.py:60} INFO - Started process 229 to run task
+[2025-05-31T20:56:34.738+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'evaluate_and_train', 'log_skipped_reason', 'manual__2025-05-31T20:56:19.363082+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/evaluate_and_train.py', '--cfg-path', '/tmp/tmpa0h6h1c_']
+[2025-05-31T20:56:34.776+0000] {standard_task_runner.py:88} INFO - Job 17: Subtask log_skipped_reason
+[2025-05-31T20:56:35.314+0000] {task_command.py:423} INFO - Running <TaskInstance: evaluate_and_train.log_skipped_reason manual__2025-05-31T20:56:19.363082+00:00 [running]> on host 9c020e596300
+[2025-05-31T20:56:36.258+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='evaluate_and_train' AIRFLOW_CTX_TASK_ID='log_skipped_reason' AIRFLOW_CTX_EXECUTION_DATE='2025-05-31T20:56:19.363082+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-31T20:56:19.363082+00:00'
+[2025-05-31T20:56:36.679+0000] {logging_mixin.py:188} WARNING - 2025/05/31 20:56:36 INFO mlflow.tracking.fluent: Experiment with name 'HousePricePrediction' does not exist. Creating a new experiment.
+[2025-05-31T20:56:37.899+0000] {logging_mixin.py:188} WARNING - 2025/05/31 20:56:37 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-05-31T20:56:38.074+0000] {logging_mixin.py:188} WARNING - 2025/05/31 20:56:38 INFO mlflow.tracking._tracking_service.client: 🏃 View run batch_skipped at: http://172.17.0.1:30500/#/experiments/1/runs/afe86d75ec6f45fca57cb10f3154efe8.
+[2025-05-31T20:56:38.078+0000] {logging_mixin.py:188} WARNING - 2025/05/31 20:56:38 INFO mlflow.tracking._tracking_service.client: 🧪 View experiment at: http://172.17.0.1:30500/#/experiments/1.
+[2025-05-31T20:56:38.115+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-05-31T20:56:38.155+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=evaluate_and_train, task_id=log_skipped_reason, execution_date=20250531T205619, start_date=20250531T205634, end_date=20250531T205638
+[2025-05-31T20:56:38.256+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-05-31T20:56:38.309+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

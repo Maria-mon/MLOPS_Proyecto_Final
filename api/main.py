@@ -1,44 +1,48 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
 import mlflow.pyfunc
 import pandas as pd
 import os
 from sqlalchemy import create_engine
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 from starlette.responses import Response
+from starlette.status import HTTP_400_BAD_REQUEST
+import numpy as np
 
 # Configuración
-MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
-MODEL_NAME = "BestHousePriceModel"
-POSTGRES_URI = os.getenv("AIRFLOW_CONN_POSTGRES_DEFAULT")  # Reutiliza variable ya existente
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow:5000")
+MODEL_NAME = os.getenv("MODEL_NAME", "BestHousePriceModel")
+POSTGRES_URI = os.getenv("AIRFLOW_CONN_POSTGRES_DEFAULT")
 
-# Inicializar API
 app = FastAPI(title="House Price Prediction API")
 
-# Métricas Prometheus
 PREDICTION_COUNT = Counter("inference_requests_total", "Número total de solicitudes de inferencia")
 PREDICTION_ERRORS = Counter("inference_errors_total", "Errores durante la inferencia")
 
-# Conectar con MLflow y cargar modelo en producción
+# Cargar modelo desde MLflow
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 model = mlflow.pyfunc.load_model(f"models:/{MODEL_NAME}/Production")
 
-# Esquema de entrada
-class InputData(BaseModel):
-    bed: int
-    bath: float
-    house_size: float
-    acre_lot: float
+# Inferir columnas esperadas dinámicamente
+expected_columns = ["group_number", "batch_number", "bed", "bath"]  # <- extraído manualmente o desde predict error
 
-# Endpoint de predicción
 @app.post("/predict")
-def predict(data: InputData):
+async def predict(request: Request):
     try:
-        df = pd.DataFrame([data.dict()])
+        input_json = await request.json()
+        df = pd.DataFrame([input_json])
+
+        # Agregar columnas faltantes como NaN
+        for col in expected_columns:
+            if col not in df.columns:
+                df[col] = np.nan
+
+        # Reordenar y eliminar columnas extras
+        df = df[expected_columns]
+
+        # Realizar predicción
         prediction = model.predict(df)[0]
         PREDICTION_COUNT.inc()
 
-        # Guardar predicción en base de datos
         try:
             engine = create_engine(POSTGRES_URI)
             df["prediction"] = prediction
@@ -52,7 +56,6 @@ def predict(data: InputData):
         PREDICTION_ERRORS.inc()
         return {"error": str(e)}
 
-# Endpoint para Prometheus
 @app.get("/metrics")
 def metrics():
     return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)

@@ -21,7 +21,7 @@ spec:
             - containerPort: 8501
           env:
             - name: INFERENCE_API_URL
-              value: http://api:8000
+              value: http://inference-api:8000/predict
 
 ---
 # --- SERVICE streamlit_ui ---

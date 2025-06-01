@@ -1,0 +1,29 @@
+[2025-06-01T14:38:12.847+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:38:09.141401+00:00 [queued]>
+[2025-06-01T14:38:12.870+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:38:09.141401+00:00 [queued]>
+[2025-06-01T14:38:12.871+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-06-01T14:38:12.916+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 14:38:09.141401+00:00
+[2025-06-01T14:38:12.957+0000] {standard_task_runner.py:60} INFO - Started process 28436 to run task
+[2025-06-01T14:38:12.976+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T14:38:09.141401+00:00', '--job-id', '92', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmpabut39ga']
+[2025-06-01T14:38:12.982+0000] {standard_task_runner.py:88} INFO - Job 92: Subtask get_data_from_api
+[2025-06-01T14:38:13.109+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:38:09.141401+00:00 [running]> on host 9c020e596300
+[2025-06-01T14:38:13.382+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T14:38:09.141401+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T14:38:09.141401+00:00'
+[2025-06-01T14:38:13.390+0000] {get_ingest_preprocess.py:18} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T14:38:19.529+0000] {get_ingest_preprocess.py:34} INFO - [INFO] Data expandida. Nuevas columnas: ['brokered_by', 'status', 'price', 'bed', 'bath', 'acre_lot', 'street', 'city', 'state', 'zip_code', 'house_size', 'prev_sold_date']
+[2025-06-01T14:38:19.576+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'brokered_by' agregada a la tabla.
+[2025-06-01T14:38:19.583+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'status' agregada a la tabla.
+[2025-06-01T14:38:19.591+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'price' agregada a la tabla.
+[2025-06-01T14:38:19.599+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'bed' agregada a la tabla.
+[2025-06-01T14:38:19.605+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'bath' agregada a la tabla.
+[2025-06-01T14:38:19.611+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'acre_lot' agregada a la tabla.
+[2025-06-01T14:38:19.616+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'street' agregada a la tabla.
+[2025-06-01T14:38:19.620+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'city' agregada a la tabla.
+[2025-06-01T14:38:19.627+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'state' agregada a la tabla.
+[2025-06-01T14:38:19.631+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'zip_code' agregada a la tabla.
+[2025-06-01T14:38:19.637+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'house_size' agregada a la tabla.
+[2025-06-01T14:38:19.643+0000] {get_ingest_preprocess.py:50} INFO - [INFO] Columna 'prev_sold_date' agregada a la tabla.
+[2025-06-01T14:38:19.646+0000] {get_ingest_preprocess.py:56} INFO - [INFO] Columna faltante 'data' añadida al DataFrame con NaN.
+[2025-06-01T14:38:26.812+0000] {get_ingest_preprocess.py:66} INFO - [INFO] 73784 registros guardados en la tabla 'raw_data'
+[2025-06-01T14:38:26.899+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-06-01T14:38:26.921+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T143809, start_date=20250601T143812, end_date=20250601T143826
+[2025-06-01T14:38:27.058+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-06-01T14:38:27.096+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,70 @@
+[2025-06-01T13:54:37.764+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:52:25.776984+00:00 [queued]>
+[2025-06-01T13:54:37.781+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:52:25.776984+00:00 [queued]>
+[2025-06-01T13:54:37.781+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-06-01T13:54:37.804+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 13:52:25.776984+00:00
+[2025-06-01T13:54:37.821+0000] {standard_task_runner.py:60} INFO - Started process 27185 to run task
+[2025-06-01T13:54:37.831+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T13:52:25.776984+00:00', '--job-id', '84', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmp5lb111qg']
+[2025-06-01T13:54:37.839+0000] {standard_task_runner.py:88} INFO - Job 84: Subtask get_data_from_api
+[2025-06-01T13:54:37.969+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:52:25.776984+00:00 [running]> on host 9c020e596300
+[2025-06-01T13:54:38.216+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T13:52:25.776984+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T13:52:25.776984+00:00'
+[2025-06-01T13:54:38.221+0000] {logging_mixin.py:188} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T13:54:45.402+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'dict'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 58, in get_data_from_api
+    df.to_sql(RAW_TABLE, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': [{'brokered_by': 92147.0, 'status': 'for_sale', 'price': 110000.0, 'bed': 7.0, 'bath': 3.0, 'acre_lot': 0.09, 'street': 1842706.0, 'city': 'Dorado', ' ... (23337193 characters truncated) ... re_lot': 0.05, 'street': 1797356.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 995.0, 'prev_sold_date': '2018-08-22'}]}]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T13:54:45.972+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T135225, start_date=20250601T135437, end_date=20250601T135445
+[2025-06-01T13:54:46.001+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 84 for task get_data_from_api ((psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': [{'brokered_by': 92147.0, 'status': 'for_sale', 'price': 110000.0, 'bed': 7.0, 'bath': 3.0, 'acre_lot': 0.09, 'street': 1842706.0, 'city': 'Dorado', ' ... (23337193 characters truncated) ... re_lot': 0.05, 'street': 1797356.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 995.0, 'prev_sold_date': '2018-08-22'}]}]
+(Background on this error at: https://sqlalche.me/e/14/f405); 27185)
+[2025-06-01T13:54:46.603+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T13:54:46.658+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -45,6 +45,8 @@ spec:
             - name: MLFLOW_S3_ENDPOINT_URL
               value: http://minio-nodeport:9000
             - name: MODEL_NAME
-              value: diabetes_model
-          command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+              value: BestHousePriceModel
+            - name: AIRFLOW_CONN_POSTGRES_DEFAULT
+              value: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 

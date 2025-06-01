@@ -1,27 +1,22 @@
-# --- prometheus.yaml ---
-
-# CONFIGMAP Prometheus
+# --- CONFIGMAP ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
   namespace: mlops
   labels:
-    name: prometheus-config
     app: prometheus
-
 data:
   prometheus.yml: |
     global:
-      scrape_interval: 15s
-
+      scrape_interval: 5s
     scrape_configs:
       - job_name: 'inference-api'
         static_configs:
-          - targets: ['api:8000']
+          - targets: ['inference-api:8000']
 
 ---
-# DEPLOYMENT Prometheus
+# --- DEPLOYMENT ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,10 +40,26 @@ spec:
           ports:
             - containerPort: 9090
           volumeMounts:
-            - name: prometheus-config-volume
+            - name: config
               mountPath: /etc/prometheus/
       volumes:
-        - name: prometheus-config-volume
+        - name: config
           configMap:
             name: prometheus-config
+
+---
+# --- SERVICE ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: mlops
+spec:
+  selector:
+    app: prometheus
+  type: NodePort
+  ports:
+    - port: 9090
+      targetPort: 9090
+      nodePort: 30990
 

@@ -1,0 +1,89 @@
+[2025-06-01T14:32:50.680+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [queued]>
+[2025-06-01T14:32:50.699+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [queued]>
+[2025-06-01T14:32:50.700+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-06-01T14:32:50.727+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 14:27:34.046358+00:00
+[2025-06-01T14:32:50.745+0000] {standard_task_runner.py:60} INFO - Started process 28277 to run task
+[2025-06-01T14:32:50.754+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T14:27:34.046358+00:00', '--job-id', '91', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmp_wsr1yk3']
+[2025-06-01T14:32:50.760+0000] {standard_task_runner.py:88} INFO - Job 91: Subtask get_data_from_api
+[2025-06-01T14:32:50.920+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [running]> on host 9c020e596300
+[2025-06-01T14:32:51.170+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T14:27:34.046358+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T14:27:34.046358+00:00'
+[2025-06-01T14:32:51.174+0000] {get_ingest_preprocess.py:22} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T14:33:09.292+0000] {get_ingest_preprocess.py:32} INFO - [INFO] Primeras filas del batch recibido:
+   group_number  ...                                               data
+0             2  ...  {'brokered_by': 61711.0, 'status': 'sold', 'pr...
+1             2  ...  {'brokered_by': 49592.0, 'status': 'sold', 'pr...
+2             2  ...  {'brokered_by': 72408.0, 'status': 'sold', 'pr...
+3             2  ...  {'brokered_by': 60830.0, 'status': 'sold', 'pr...
+4             2  ...  {'brokered_by': 60830.0, 'status': 'sold', 'pr...
+
+[5 rows x 4 columns]
+[2025-06-01T14:33:12.583+0000] {get_ingest_preprocess.py:66} ERROR - [ERROR] Error en la tarea get_data_from_api: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 61711.0, 'status': 'sold', 'price': 90000.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.08, 'street': 141421.0, 'city': 'Aguadilla', 'state': 'Puerto Rico', 'zip_code': 603.0, 'house_size': 1421.0, 'prev_sold_date': '2021-10-19'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 49592.0, 'status': 'sold', 'price': 22500.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.32, 'street': 1889894.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 850.0, 'prev_sold_date': '2021-12-30'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 72408.0, 'status': 'sold', 'price': 168000.0, 'bed': 6.0, 'bath': 4.0, 'acre_lot': 0.05, 'street': 1157317.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 3422.0, 'prev_sold_date': '2021-10-21'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 200000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 4.98, 'street': 1855411.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 580.0, 'prev_sold_date': '2022-03-16'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 250000.0, 'bed': 5.0, 'bath': 2.0, 'acre_lot': 0.25, 'street': 1946165.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 1210.0, 'prev_sold_date': '2022-02-24'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 103780.0, 'status': 'sold', 'price': 130000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.07, 'street': 1911843.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 847.0, 'prev_sold_date': '2022-03-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 31238.0, 'status': 'sold', 'price': 165000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 2.73, 'street': 1856948.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 696.0, 'prev_sold_date': '2022-03-18'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 16802.0, 'status': 'sold', 'price': 120000.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 0.18, 'street': 1921908.0, 'city': 'Sabana Grande', 'state': 'Puerto Rico', 'zip_code': 637.0, 'house_size': 1188.0, 'prev_sold_date': '2021-10-21'}}  ... displaying 10 of 230366 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 33745.0, 'status': 'sold', 'price': 270000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.15, 'street': 277987.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 1266.0, 'prev_sold_date': '2022-02-22'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 53618.0, 'status': 'sold', 'price': 179900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.09, 'street': 761379.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 933.0, 'prev_sold_date': '2022-03-24'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T14:33:12.584+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1296, in execute_values
+    parts.append(cur.mogrify(template, args))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 67, in get_data_from_api
+    raise e
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 62, in get_data_from_api
+    df.to_sql(RAW_TABLE, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1296, in execute_values
+    parts.append(cur.mogrify(template, args))
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 61711.0, 'status': 'sold', 'price': 90000.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.08, 'street': 141421.0, 'city': 'Aguadilla', 'state': 'Puerto Rico', 'zip_code': 603.0, 'house_size': 1421.0, 'prev_sold_date': '2021-10-19'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 49592.0, 'status': 'sold', 'price': 22500.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.32, 'street': 1889894.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 850.0, 'prev_sold_date': '2021-12-30'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 72408.0, 'status': 'sold', 'price': 168000.0, 'bed': 6.0, 'bath': 4.0, 'acre_lot': 0.05, 'street': 1157317.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 3422.0, 'prev_sold_date': '2021-10-21'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 200000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 4.98, 'street': 1855411.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 580.0, 'prev_sold_date': '2022-03-16'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 250000.0, 'bed': 5.0, 'bath': 2.0, 'acre_lot': 0.25, 'street': 1946165.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 1210.0, 'prev_sold_date': '2022-02-24'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 103780.0, 'status': 'sold', 'price': 130000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.07, 'street': 1911843.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 847.0, 'prev_sold_date': '2022-03-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 31238.0, 'status': 'sold', 'price': 165000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 2.73, 'street': 1856948.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 696.0, 'prev_sold_date': '2022-03-18'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 16802.0, 'status': 'sold', 'price': 120000.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 0.18, 'street': 1921908.0, 'city': 'Sabana Grande', 'state': 'Puerto Rico', 'zip_code': 637.0, 'house_size': 1188.0, 'prev_sold_date': '2021-10-21'}}  ... displaying 10 of 230366 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 33745.0, 'status': 'sold', 'price': 270000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.15, 'street': 277987.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 1266.0, 'prev_sold_date': '2022-02-22'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 53618.0, 'status': 'sold', 'price': 179900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.09, 'street': 761379.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 933.0, 'prev_sold_date': '2022-03-24'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T14:33:12.613+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T142734, start_date=20250601T143250, end_date=20250601T143312
+[2025-06-01T14:33:12.638+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 91 for task get_data_from_api ((psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 61711.0, 'status': 'sold', 'price': 90000.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.08, 'street': 141421.0, 'city': 'Aguadilla', 'state': 'Puerto Rico', 'zip_code': 603.0, 'house_size': 1421.0, 'prev_sold_date': '2021-10-19'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 49592.0, 'status': 'sold', 'price': 22500.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.32, 'street': 1889894.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 850.0, 'prev_sold_date': '2021-12-30'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 72408.0, 'status': 'sold', 'price': 168000.0, 'bed': 6.0, 'bath': 4.0, 'acre_lot': 0.05, 'street': 1157317.0, 'city': 'Anasco', 'state': 'Puerto Rico', 'zip_code': 610.0, 'house_size': 3422.0, 'prev_sold_date': '2021-10-21'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 200000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 4.98, 'street': 1855411.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 580.0, 'prev_sold_date': '2022-03-16'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 60830.0, 'status': 'sold', 'price': 250000.0, 'bed': 5.0, 'bath': 2.0, 'acre_lot': 0.25, 'street': 1946165.0, 'city': 'Arecibo', 'state': 'Puerto Rico', 'zip_code': 612.0, 'house_size': 1210.0, 'prev_sold_date': '2022-02-24'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 103780.0, 'status': 'sold', 'price': 130000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.07, 'street': 1911843.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 847.0, 'prev_sold_date': '2022-03-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 31238.0, 'status': 'sold', 'price': 165000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 2.73, 'street': 1856948.0, 'city': 'Cabo Rojo', 'state': 'Puerto Rico', 'zip_code': 623.0, 'house_size': 696.0, 'prev_sold_date': '2022-03-18'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 16802.0, 'status': 'sold', 'price': 120000.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 0.18, 'street': 1921908.0, 'city': 'Sabana Grande', 'state': 'Puerto Rico', 'zip_code': 637.0, 'house_size': 1188.0, 'prev_sold_date': '2021-10-21'}}  ... displaying 10 of 230366 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 33745.0, 'status': 'sold', 'price': 270000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.15, 'street': 277987.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 1266.0, 'prev_sold_date': '2022-02-22'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 2, 'data': {'brokered_by': 53618.0, 'status': 'sold', 'price': 179900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.09, 'street': 761379.0, 'city': 'Richland', 'state': 'Washington', 'zip_code': 99354.0, 'house_size': 933.0, 'prev_sold_date': '2022-03-24'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 28277)
+[2025-06-01T14:33:12.796+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T14:33:12.827+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

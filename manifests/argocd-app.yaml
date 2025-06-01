@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Maria-mon/MLOPS_Proyecto_Final_2025
+    repoURL: https://github.com/Maria-mon/MLOPS_Proyecto_Final
     targetRevision: main
     path: manifests
   destination:

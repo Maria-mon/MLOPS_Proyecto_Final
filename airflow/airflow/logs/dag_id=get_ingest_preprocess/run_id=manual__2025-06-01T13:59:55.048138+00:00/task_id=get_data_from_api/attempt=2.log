@@ -1,0 +1,92 @@
+[2025-06-01T14:02:26.428+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:59:55.048138+00:00 [queued]>
+[2025-06-01T14:02:26.452+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:59:55.048138+00:00 [queued]>
+[2025-06-01T14:02:26.453+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-06-01T14:02:26.492+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 13:59:55.048138+00:00
+[2025-06-01T14:02:26.531+0000] {standard_task_runner.py:60} INFO - Started process 27413 to run task
+[2025-06-01T14:02:26.545+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T13:59:55.048138+00:00', '--job-id', '86', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmpqtc_z6ij']
+[2025-06-01T14:02:26.552+0000] {standard_task_runner.py:88} INFO - Job 86: Subtask get_data_from_api
+[2025-06-01T14:02:26.693+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T13:59:55.048138+00:00 [running]> on host 9c020e596300
+[2025-06-01T14:02:26.957+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T13:59:55.048138+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T13:59:55.048138+00:00'
+[2025-06-01T14:02:26.961+0000] {logging_mixin.py:188} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T14:02:27.319+0000] {logging_mixin.py:188} INFO - [INFO] Primeras filas del batch recibido:
+   brokered_by    status     price  ...  zip_code  house_size  prev_sold_date
+0      67455.0  for_sale  289900.0  ...    1001.0      1276.0      2012-10-12
+1      33714.0  for_sale  199999.0  ...    1001.0      1968.0      2008-09-19
+2      62476.0  for_sale  275000.0  ...    1002.0      1280.0      2021-08-19
+3      77236.0  for_sale  249900.0  ...    1020.0      1514.0      1996-07-30
+4      98727.0  for_sale  240000.0  ...    1013.0      1207.0      2011-11-29
+
+[5 rows x 12 columns]
+[2025-06-01T14:02:27.456+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedColumn: column "brokered_by" of relation "raw_data" does not exist
+LINE 1: INSERT INTO raw_data (brokered_by, status, price, bed, bath,...
+                              ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 59, in get_data_from_api
+    df.to_sql(RAW_TABLE, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "brokered_by" of relation "raw_data" does not exist
+LINE 1: INSERT INTO raw_data (brokered_by, status, price, bed, bath,...
+                              ^
+
+[SQL: INSERT INTO raw_data (brokered_by, status, price, bed, bath, acre_lot, street, city, state, zip_code, house_size, prev_sold_date) VALUES (%(brokered_by)s, %(status)s, %(price)s, %(bed)s, %(bath)s, %(acre_lot)s, %(street)s, %(city)s, %(state)s, %(zip_code)s, %(house_size)s, %(prev_sold_date)s)]
+[parameters: ({'brokered_by': 67455.0, 'status': 'for_sale', 'price': 289900.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.36, 'street': 1698080.0, 'city': 'Agawam', 'state': 'Massachusetts', 'zip_code': 1001.0, 'house_size': 1276.0, 'prev_sold_date': '2012-10-12'}, {'brokered_by': 33714.0, 'status': 'for_sale', 'price': 199999.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 1.76, 'street': 1745924.0, 'city': 'Agawam', 'state': 'Massachusetts', 'zip_code': 1001.0, 'house_size': 1968.0, 'prev_sold_date': '2008-09-19'}, {'brokered_by': 62476.0, 'status': 'for_sale', 'price': 275000.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.16, 'street': 1308332.0, 'city': 'Amherst', 'state': 'Massachusetts', 'zip_code': 1002.0, 'house_size': 1280.0, 'prev_sold_date': '2021-08-19'}, {'brokered_by': 77236.0, 'status': 'for_sale', 'price': 249900.0, 'bed': 4.0, 'bath': 3.0, 'acre_lot': 0.29, 'street': 1342303.0, 'city': 'Chicopee', 'state': 'Massachusetts', 'zip_code': 1020.0, 'house_size': 1514.0, 'prev_sold_date': '1996-07-30'}, {'brokered_by': 98727.0, 'status': 'for_sale', 'price': 240000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.28, 'street': 1548010.0, 'city': 'Chicopee', 'state': 'Massachusetts', 'zip_code': 1013.0, 'house_size': 1207.0, 'prev_sold_date': '2011-11-29'}, {'brokered_by': 30212.0, 'status': 'for_sale', 'price': 224900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.4, 'street': 553770.0, 'city': 'South Hadley', 'state': 'Massachusetts', 'zip_code': 1075.0, 'house_size': 1034.0, 'prev_sold_date': '1996-02-28'}, {'brokered_by': 8147.0, 'status': 'for_sale', 'price': 299500.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.11, 'street': 114750.0, 'city': 'Ludlow', 'state': 'Massachusetts', 'zip_code': 1056.0, 'house_size': 2240.0, 'prev_sold_date': '2000-10-03'}, {'brokered_by': 67832.0, 'status': 'for_sale', 'price': 295000.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 0.3, 'street': 893552.0, 'city': 'South Hadley', 'state': 'Massachusetts', 'zip_code': 1075.0, 'house_size': 2112.0, 'prev_sold_date': '2001-05-24'}  ... displaying 10 of 4055 total bound parameter sets ...  {'brokered_by': 4006.0, 'status': 'sold', 'price': 239900.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 1.3, 'street': 77668.0, 'city': 'Lanesborough', 'state': 'Massachusetts', 'zip_code': 1237.0, 'house_size': 1712.0, 'prev_sold_date': '2022-03-11'}, {'brokered_by': 7905.0, 'status': 'sold', 'price': 275000.0, 'bed': 5.0, 'bath': 3.0, 'acre_lot': 0.24, 'street': 578170.0, 'city': 'Pittsfield', 'state': 'Massachusetts', 'zip_code': 1201.0, 'house_size': 3218.0, 'prev_sold_date': '2021-10-22'})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T14:02:27.491+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T135955, start_date=20250601T140226, end_date=20250601T140227
+[2025-06-01T14:02:27.510+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 86 for task get_data_from_api ((psycopg2.errors.UndefinedColumn) column "brokered_by" of relation "raw_data" does not exist
+LINE 1: INSERT INTO raw_data (brokered_by, status, price, bed, bath,...
+                              ^
+
+[SQL: INSERT INTO raw_data (brokered_by, status, price, bed, bath, acre_lot, street, city, state, zip_code, house_size, prev_sold_date) VALUES (%(brokered_by)s, %(status)s, %(price)s, %(bed)s, %(bath)s, %(acre_lot)s, %(street)s, %(city)s, %(state)s, %(zip_code)s, %(house_size)s, %(prev_sold_date)s)]
+[parameters: ({'brokered_by': 67455.0, 'status': 'for_sale', 'price': 289900.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.36, 'street': 1698080.0, 'city': 'Agawam', 'state': 'Massachusetts', 'zip_code': 1001.0, 'house_size': 1276.0, 'prev_sold_date': '2012-10-12'}, {'brokered_by': 33714.0, 'status': 'for_sale', 'price': 199999.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 1.76, 'street': 1745924.0, 'city': 'Agawam', 'state': 'Massachusetts', 'zip_code': 1001.0, 'house_size': 1968.0, 'prev_sold_date': '2008-09-19'}, {'brokered_by': 62476.0, 'status': 'for_sale', 'price': 275000.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.16, 'street': 1308332.0, 'city': 'Amherst', 'state': 'Massachusetts', 'zip_code': 1002.0, 'house_size': 1280.0, 'prev_sold_date': '2021-08-19'}, {'brokered_by': 77236.0, 'status': 'for_sale', 'price': 249900.0, 'bed': 4.0, 'bath': 3.0, 'acre_lot': 0.29, 'street': 1342303.0, 'city': 'Chicopee', 'state': 'Massachusetts', 'zip_code': 1020.0, 'house_size': 1514.0, 'prev_sold_date': '1996-07-30'}, {'brokered_by': 98727.0, 'status': 'for_sale', 'price': 240000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.28, 'street': 1548010.0, 'city': 'Chicopee', 'state': 'Massachusetts', 'zip_code': 1013.0, 'house_size': 1207.0, 'prev_sold_date': '2011-11-29'}, {'brokered_by': 30212.0, 'status': 'for_sale', 'price': 224900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.4, 'street': 553770.0, 'city': 'South Hadley', 'state': 'Massachusetts', 'zip_code': 1075.0, 'house_size': 1034.0, 'prev_sold_date': '1996-02-28'}, {'brokered_by': 8147.0, 'status': 'for_sale', 'price': 299500.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.11, 'street': 114750.0, 'city': 'Ludlow', 'state': 'Massachusetts', 'zip_code': 1056.0, 'house_size': 2240.0, 'prev_sold_date': '2000-10-03'}, {'brokered_by': 67832.0, 'status': 'for_sale', 'price': 295000.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 0.3, 'street': 893552.0, 'city': 'South Hadley', 'state': 'Massachusetts', 'zip_code': 1075.0, 'house_size': 2112.0, 'prev_sold_date': '2001-05-24'}  ... displaying 10 of 4055 total bound parameter sets ...  {'brokered_by': 4006.0, 'status': 'sold', 'price': 239900.0, 'bed': 4.0, 'bath': 2.0, 'acre_lot': 1.3, 'street': 77668.0, 'city': 'Lanesborough', 'state': 'Massachusetts', 'zip_code': 1237.0, 'house_size': 1712.0, 'prev_sold_date': '2022-03-11'}, {'brokered_by': 7905.0, 'status': 'sold', 'price': 275000.0, 'bed': 5.0, 'bath': 3.0, 'acre_lot': 0.24, 'street': 578170.0, 'city': 'Pittsfield', 'state': 'Massachusetts', 'zip_code': 1201.0, 'house_size': 3218.0, 'prev_sold_date': '2021-10-22'})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 27413)
+[2025-06-01T14:02:27.572+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T14:02:27.620+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,89 @@
+[2025-06-01T14:27:39.429+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [queued]>
+[2025-06-01T14:27:39.463+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [queued]>
+[2025-06-01T14:27:39.465+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-06-01T14:27:39.507+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): get_data_from_api> on 2025-06-01 14:27:34.046358+00:00
+[2025-06-01T14:27:39.534+0000] {standard_task_runner.py:60} INFO - Started process 28131 to run task
+[2025-06-01T14:27:39.551+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'get_data_from_api', 'manual__2025-06-01T14:27:34.046358+00:00', '--job-id', '90', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmpk9t8y5h0']
+[2025-06-01T14:27:39.560+0000] {standard_task_runner.py:88} INFO - Job 90: Subtask get_data_from_api
+[2025-06-01T14:27:39.793+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.get_data_from_api manual__2025-06-01T14:27:34.046358+00:00 [running]> on host 9c020e596300
+[2025-06-01T14:27:40.143+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='get_data_from_api' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T14:27:34.046358+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T14:27:34.046358+00:00'
+[2025-06-01T14:27:40.149+0000] {get_ingest_preprocess.py:22} INFO - [INFO] Haciendo request a http://10.43.101.108:80/data con params {'group_number': 2, 'day': 'Tuesday'}
+[2025-06-01T14:27:46.828+0000] {get_ingest_preprocess.py:32} INFO - [INFO] Primeras filas del batch recibido:
+   group_number  ...                                               data
+0             2  ...  {'brokered_by': 92147.0, 'status': 'for_sale',...
+1             2  ...  {'brokered_by': 91020.0, 'status': 'for_sale',...
+2             2  ...  {'brokered_by': 10585.0, 'status': 'for_sale',...
+3             2  ...  {'brokered_by': 22611.0, 'status': 'for_sale',...
+4             2  ...  {'brokered_by': 75650.0, 'status': 'for_sale',...
+
+[5 rows x 4 columns]
+[2025-06-01T14:27:48.240+0000] {get_ingest_preprocess.py:66} ERROR - [ERROR] Error en la tarea get_data_from_api: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 92147.0, 'status': 'for_sale', 'price': 110000.0, 'bed': 7.0, 'bath': 3.0, 'acre_lot': 0.09, 'street': 1842706.0, 'city': 'Dorado', 'state': 'Puerto Rico', 'zip_code': 949.0, 'house_size': 1192.0, 'prev_sold_date': '2019-06-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 91020.0, 'status': 'for_sale', 'price': 215000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.91, 'street': 1062364.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 960.0, 'prev_sold_date': '2012-06-06'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 10585.0, 'status': 'for_sale', 'price': 144900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.36, 'street': 765673.0, 'city': 'Vernon', 'state': 'Connecticut', 'zip_code': 6066.0, 'house_size': 860.0, 'prev_sold_date': '2016-09-02'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 22611.0, 'status': 'for_sale', 'price': 239900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 1.43, 'street': 1244868.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 1351.0, 'prev_sold_date': '2009-06-05'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 75650.0, 'status': 'for_sale', 'price': 249900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.23, 'street': 114997.0, 'city': 'Enfield', 'state': 'Connecticut', 'zip_code': 6082.0, 'house_size': 1220.0, 'prev_sold_date': '2003-11-14'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 51868.0, 'status': 'for_sale', 'price': 300000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.69, 'street': 523930.0, 'city': 'Stafford', 'state': 'Connecticut', 'zip_code': 6076.0, 'house_size': 1192.0, 'prev_sold_date': '2003-11-17'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 15017.0, 'status': 'for_sale', 'price': 248900.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.26, 'street': 1296964.0, 'city': 'Ellington', 'state': 'Connecticut', 'zip_code': 6029.0, 'house_size': 1174.0, 'prev_sold_date': '2008-07-09'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 98460.0, 'status': 'for_sale', 'price': 40000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.29, 'street': 1314092.0, 'city': 'Winchester', 'state': 'Connecticut', 'zip_code': 6098.0, 'house_size': 1450.0, 'prev_sold_date': '2015-03-13'}}  ... displaying 10 of 94551 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 4485.0, 'status': 'for_sale', 'price': 285000.0, 'bed': 2.0, 'bath': 2.0, 'acre_lot': 0.19, 'street': 371997.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 1064.0, 'prev_sold_date': '2019-07-03'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 77334.0, 'status': 'for_sale', 'price': 274000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.05, 'street': 1797356.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 995.0, 'prev_sold_date': '2018-08-22'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T14:27:48.241+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1296, in execute_values
+    parts.append(cur.mogrify(template, args))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 67, in get_data_from_api
+    raise e
+  File "/opt/airflow/dags/get_ingest_preprocess.py", line 62, in get_data_from_api
+    df.to_sql(RAW_TABLE, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1920, in to_sql
+    total_inserted = sql_engine.insert_records(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1470, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1461, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1023, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 929, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/extras.py", line 1296, in execute_values
+    parts.append(cur.mogrify(template, args))
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 92147.0, 'status': 'for_sale', 'price': 110000.0, 'bed': 7.0, 'bath': 3.0, 'acre_lot': 0.09, 'street': 1842706.0, 'city': 'Dorado', 'state': 'Puerto Rico', 'zip_code': 949.0, 'house_size': 1192.0, 'prev_sold_date': '2019-06-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 91020.0, 'status': 'for_sale', 'price': 215000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.91, 'street': 1062364.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 960.0, 'prev_sold_date': '2012-06-06'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 10585.0, 'status': 'for_sale', 'price': 144900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.36, 'street': 765673.0, 'city': 'Vernon', 'state': 'Connecticut', 'zip_code': 6066.0, 'house_size': 860.0, 'prev_sold_date': '2016-09-02'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 22611.0, 'status': 'for_sale', 'price': 239900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 1.43, 'street': 1244868.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 1351.0, 'prev_sold_date': '2009-06-05'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 75650.0, 'status': 'for_sale', 'price': 249900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.23, 'street': 114997.0, 'city': 'Enfield', 'state': 'Connecticut', 'zip_code': 6082.0, 'house_size': 1220.0, 'prev_sold_date': '2003-11-14'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 51868.0, 'status': 'for_sale', 'price': 300000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.69, 'street': 523930.0, 'city': 'Stafford', 'state': 'Connecticut', 'zip_code': 6076.0, 'house_size': 1192.0, 'prev_sold_date': '2003-11-17'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 15017.0, 'status': 'for_sale', 'price': 248900.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.26, 'street': 1296964.0, 'city': 'Ellington', 'state': 'Connecticut', 'zip_code': 6029.0, 'house_size': 1174.0, 'prev_sold_date': '2008-07-09'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 98460.0, 'status': 'for_sale', 'price': 40000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.29, 'street': 1314092.0, 'city': 'Winchester', 'state': 'Connecticut', 'zip_code': 6098.0, 'house_size': 1450.0, 'prev_sold_date': '2015-03-13'}}  ... displaying 10 of 94551 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 4485.0, 'status': 'for_sale', 'price': 285000.0, 'bed': 2.0, 'bath': 2.0, 'acre_lot': 0.19, 'street': 371997.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 1064.0, 'prev_sold_date': '2019-07-03'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 77334.0, 'status': 'for_sale', 'price': 274000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.05, 'street': 1797356.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 995.0, 'prev_sold_date': '2018-08-22'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-06-01T14:27:48.269+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=get_ingest_preprocess, task_id=get_data_from_api, execution_date=20250601T142734, start_date=20250601T142739, end_date=20250601T142748
+[2025-06-01T14:27:48.296+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 90 for task get_data_from_api ((psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: INSERT INTO raw_data (group_number, day, batch_number, data) VALUES (%(group_number)s, %(day)s, %(batch_number)s, %(data)s)]
+[parameters: ({'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 92147.0, 'status': 'for_sale', 'price': 110000.0, 'bed': 7.0, 'bath': 3.0, 'acre_lot': 0.09, 'street': 1842706.0, 'city': 'Dorado', 'state': 'Puerto Rico', 'zip_code': 949.0, 'house_size': 1192.0, 'prev_sold_date': '2019-06-28'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 91020.0, 'status': 'for_sale', 'price': 215000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.91, 'street': 1062364.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 960.0, 'prev_sold_date': '2012-06-06'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 10585.0, 'status': 'for_sale', 'price': 144900.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.36, 'street': 765673.0, 'city': 'Vernon', 'state': 'Connecticut', 'zip_code': 6066.0, 'house_size': 860.0, 'prev_sold_date': '2016-09-02'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 22611.0, 'status': 'for_sale', 'price': 239900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 1.43, 'street': 1244868.0, 'city': 'East Windsor', 'state': 'Connecticut', 'zip_code': 6016.0, 'house_size': 1351.0, 'prev_sold_date': '2009-06-05'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 75650.0, 'status': 'for_sale', 'price': 249900.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.23, 'street': 114997.0, 'city': 'Enfield', 'state': 'Connecticut', 'zip_code': 6082.0, 'house_size': 1220.0, 'prev_sold_date': '2003-11-14'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 51868.0, 'status': 'for_sale', 'price': 300000.0, 'bed': 3.0, 'bath': 1.0, 'acre_lot': 0.69, 'street': 523930.0, 'city': 'Stafford', 'state': 'Connecticut', 'zip_code': 6076.0, 'house_size': 1192.0, 'prev_sold_date': '2003-11-17'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 15017.0, 'status': 'for_sale', 'price': 248900.0, 'bed': 3.0, 'bath': 2.0, 'acre_lot': 0.26, 'street': 1296964.0, 'city': 'Ellington', 'state': 'Connecticut', 'zip_code': 6029.0, 'house_size': 1174.0, 'prev_sold_date': '2008-07-09'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 98460.0, 'status': 'for_sale', 'price': 40000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.29, 'street': 1314092.0, 'city': 'Winchester', 'state': 'Connecticut', 'zip_code': 6098.0, 'house_size': 1450.0, 'prev_sold_date': '2015-03-13'}}  ... displaying 10 of 94551 total bound parameter sets ...  {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 4485.0, 'status': 'for_sale', 'price': 285000.0, 'bed': 2.0, 'bath': 2.0, 'acre_lot': 0.19, 'street': 371997.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 1064.0, 'prev_sold_date': '2019-07-03'}}, {'group_number': 2, 'day': 'Tuesday', 'batch_number': 1, 'data': {'brokered_by': 77334.0, 'status': 'for_sale', 'price': 274000.0, 'bed': 2.0, 'bath': 1.0, 'acre_lot': 0.05, 'street': 1797356.0, 'city': 'Ketchikan', 'state': 'Alaska', 'zip_code': 99901.0, 'house_size': 995.0, 'prev_sold_date': '2018-08-22'}})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 28131)
+[2025-06-01T14:27:48.401+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-06-01T14:27:48.450+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

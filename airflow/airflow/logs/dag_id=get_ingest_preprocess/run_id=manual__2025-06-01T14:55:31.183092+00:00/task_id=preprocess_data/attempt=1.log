@@ -1,0 +1,14 @@
+[2025-06-01T14:55:51.337+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: get_ingest_preprocess.preprocess_data manual__2025-06-01T14:55:31.183092+00:00 [queued]>
+[2025-06-01T14:55:51.364+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: get_ingest_preprocess.preprocess_data manual__2025-06-01T14:55:31.183092+00:00 [queued]>
+[2025-06-01T14:55:51.364+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-06-01T14:55:51.388+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): preprocess_data> on 2025-06-01 14:55:31.183092+00:00
+[2025-06-01T14:55:51.414+0000] {standard_task_runner.py:60} INFO - Started process 28952 to run task
+[2025-06-01T14:55:51.431+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'get_ingest_preprocess', 'preprocess_data', 'manual__2025-06-01T14:55:31.183092+00:00', '--job-id', '96', '--raw', '--subdir', 'DAGS_FOLDER/get_ingest_preprocess.py', '--cfg-path', '/tmp/tmptjhhtwau']
+[2025-06-01T14:55:51.437+0000] {standard_task_runner.py:88} INFO - Job 96: Subtask preprocess_data
+[2025-06-01T14:55:51.556+0000] {task_command.py:423} INFO - Running <TaskInstance: get_ingest_preprocess.preprocess_data manual__2025-06-01T14:55:31.183092+00:00 [running]> on host 9c020e596300
+[2025-06-01T14:55:51.755+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='get_ingest_preprocess' AIRFLOW_CTX_TASK_ID='preprocess_data' AIRFLOW_CTX_EXECUTION_DATE='2025-06-01T14:55:31.183092+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-01T14:55:31.183092+00:00'
+[2025-06-01T14:56:02.793+0000] {get_ingest_preprocess.py:78} INFO - [INFO] Datos procesados guardados en la tabla 'clean_data'
+[2025-06-01T14:56:02.862+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-06-01T14:56:02.917+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=get_ingest_preprocess, task_id=preprocess_data, execution_date=20250601T145531, start_date=20250601T145551, end_date=20250601T145602
+[2025-06-01T14:56:03.059+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-06-01T14:56:03.093+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

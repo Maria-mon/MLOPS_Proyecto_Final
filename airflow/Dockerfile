@@ -7,6 +7,7 @@ WORKDIR /home/airflow
 
 # Copiar requirements al entorno del usuario
 COPY requirements.txt requirements.txt
+RUN chmod 644 /requirements.txt
 
 # Instalar requirements localmente
 RUN pip install --no-cache-dir --user -r requirements.txt
