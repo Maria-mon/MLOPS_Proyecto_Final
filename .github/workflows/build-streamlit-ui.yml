@@ -33,7 +33,11 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git commit -am "Update Streamlit UI image tag to ${{ env.IMAGE_TAG }}"
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/Maria-mon/MLOPS_Proyecto_Final.git
-          git push origin main
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -am "Update Streamlit UI image tag to ${{ env.IMAGE_TAG }}"
+            git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/Maria-mon/MLOPS_Proyecto_Final.git
+            git push origin main
+          fi
 
